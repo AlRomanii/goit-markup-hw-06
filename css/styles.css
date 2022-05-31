@@ -325,6 +325,7 @@ header {
   top: 50%;
   left: 50%;
   width: 528px;
+  height: 581px;
   padding: 40px;
   background-color: var(--body-color);
   box-shadow: 0px 1px 3px rgb(0 0 0 / 12%), 0px 1px 1px rgb(0 0 0 / 14%),
@@ -333,6 +334,12 @@ header {
   transform: translate(-50%, -50%) scale(1);
   transition: transform var(--transition-timing) var(--transition-function);
 }
+
+.model-btn:hover,
+.model-btn:focus {
+  fill: var(--accent-color);
+}
+
 /* position: absolute;
   left: 50%;
   top: 50%;
@@ -362,7 +369,7 @@ header {
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 50%;
-  transition: border-color var(--transition-duration) var(--transition-timing-function);
+  transition: fill var(--transition-duration) var(--transition-timing-function);
 }
 
 /*-------- Стилизация блока чем мы занимаемся ----------*/
@@ -938,12 +945,12 @@ address {
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 4px;
   box-shadow: 0px 4px 4px rgb(0 0 0 / 15%);
-  transition: border-color var(--transition-timing) var(--transition-function);
+  transition: border-color var(--transition-duration) var(--transition-timing-function);
 }
 
 .subscribe-form-email:hover,
 .subscribe-form-email:focus {
-  border-color: var(--body-color);
+  border-color: var(--accent-color);
   outline: 0;
 }
 
@@ -952,21 +959,20 @@ address {
   color: var(--body-color);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
-  padding: 10px 62px 10px 29px;
+  padding: 10px 29px;
   min-width: 200px;
+  border: none;
   font-weight: 700;
   font-size: 16px;
   line-height: 1.88;
   cursor: pointer;
   letter-spacing: 0.06em;
-  outline: 0;
-  transition: background-color var(--transition-timing) var(--transition-timing-function);
+  transition: background-color var(--transition-duration) var(--transition-timing-function);
 }
 
 .footer-button:hover,
 .footer-button:focus {
   background-color: #188ce8;
-  outline: 0;
 }
 
 .footer-button-content {
@@ -992,14 +998,17 @@ textarea {
   line-height: 1.15;
   text-align: center;
   letter-spacing: 0.03em;
-  margin-bottom: 30px;
+  margin-bottom: 12px;
 }
 
-.form-group,
-.form-textarea,
-.form-polisy-group {
+.form-group {
   display: block;
-  margin-bottom: 28px;
+  margin-bottom: 10px;
+}
+
+.form-textarea {
+  display: block;
+  margin-bottom: 20px;
 }
 
 .form-label {
@@ -1029,10 +1038,21 @@ textarea {
   border-color: var(--accent-color);
 }
 
-.form-input:hover ~ .form-icon,
-.form-input:focus ~ .form-icon,
-.form-input:active ~ .form-icon {
+.form-input:hover + .form-icon,
+.form-input:focus + .form-icon,
+.form-input:active + .form-icon {
   fill: var(--accent-color);
+}
+
+.form-icon:hover,
+.form-icon:focus {
+  fill: var(--accent-color);
+}
+
+.form-input-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 .form-group {
@@ -1056,45 +1076,40 @@ textarea {
   outline: transparent;
 }
 
+.form-polisy-group {
+  display: flex;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.71;
+  letter-spacing: 0.03em;
+  align-items: center;
+  justify-content: center;
+  color: var(--second-text-color);
+  cursor: pointer;
+}
+
 .custom-checkbox {
   width: 16px;
   height: 15px;
+  margin-right: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 7px;
-  cursor: pointer;
-  border-radius: 2px;
-  border: 0.2px solid var(--body-color);
-  transition: background-color var(--transition-timing) var(--transition-timing-function);
-}
 
-checkbox:checked + custom-checkbox {
-  background-color: var(--accent-color);
+  border-radius: 2px;
+  border: 3px solid #000000;
+  outline-offset: -2px;
+  cursor: pointer;
 }
 
 .custom-checkbox-icon {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 16px;
-  height: 15px;
-  transform: scale(0.2);
   opacity: 0;
   transition: transform var(--transition-timing) var(--transition-function),
     opacity var(--transition-timing) var(--transition-function);
 }
 
 .checkbox:checked + .custom-checkbox-icon {
-  transform: scale(1);
   opacity: 1;
-}
-
-.form-polisy-group {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 30px;
 }
 
 .form-polisy-decs {
@@ -1106,39 +1121,31 @@ checkbox:checked + custom-checkbox {
   color: var(--primary-text-color);
 }
 
-.checkbox-container {
-  position: relative;
-  display: block;
-  width: 16px;
-  height: 15px;
-  margin-right: 8px;
-  cursor: pointer;
-}
-
-.checkbox {
+.visually-hidden-checkbox {
   position: absolute;
-  white-space: nowrap;
   width: 1px;
   height: 1px;
-  overflow: hidden;
+  margin: -1px;
   border: 0;
   padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
   clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  margin: -1px;
+  overflow: hidden;
 }
 
-.checkbox-icon-unchecked {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  width: 16px;
-  height: 15px;
-  border: 2px solid var(--caption-text-color);
-  border-radius: 2px;
-  transition: border-color var(--transition-timing) var(--transition-function),
-    border-color var(--transition-timing) var(--transition-function);
+.checkbox:checked + .custom-checkbox {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.checkbox:checked + .custom-checkbox .custom-checkbox-icon {
+  opacity: 1;
+}
+
+.custom-checkbox-icon {
+  opacity: 0;
+  transition: var(--transition-duration) var(--transition-timing-function);
 }
 
 .checkbox-label-link {
@@ -1147,6 +1154,9 @@ checkbox:checked + custom-checkbox {
 
 .submit-btn {
   display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -1165,6 +1175,7 @@ checkbox:checked + custom-checkbox {
   transition: background-color var(--transition-timing) var(--transition-function);
 }
 
-/* .modal-form {
-  text-align: center;
-} */
+.form-input-container:focus-within {
+  fill: var(--accent-color);
+  border-color: var(--accent-color);
+}
